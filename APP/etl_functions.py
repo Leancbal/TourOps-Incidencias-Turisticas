@@ -1,5 +1,5 @@
 """funciones de carga, comparacion y consulta sobre las bitacoras de incidencias.
-se usan desde las paginas Streamlit (Comparacion.py, Preguntas.py).
+se usan desde las paginas Streamlit (Comparacion.py, Dashboard.py).
 """
 from pathlib import Path
 
@@ -108,7 +108,10 @@ def calcular_kpis(df: pd.DataFrame) -> dict:
     if df.empty:
         return {"total": 0, "tipo_mas_frecuente": "-", "proveedor_top": "-", "pct_impacto_alto": 0.0}
 
-    proveedores = df["Proveedor"].dropna() #se eliminan los nulos en los proveedores 
+    df["Proveedor"] = df["Proveedor"].replace("Sin Informacion", pd.NA)
+    df["Servicio"] = df["Servicio"].replace("Sin Informacion", pd.NA)
+    # reemplazamos "Sin Informacion" por valor NA para que no se tenga en cuenta para el analisis
+    proveedores = df["Proveedor"]
     return {
         "total": len(df),
         "tipo_mas_frecuente": df["Tipo incidente"].mode().iat[0],
