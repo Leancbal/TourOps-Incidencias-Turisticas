@@ -1,7 +1,7 @@
 pandas
 streamlit
 plotly
-ydata_profiling
-streamlit_ydata_profiling
+ydata-profiling
+streamlit-ydata-profiling
 pywebview
 requests
